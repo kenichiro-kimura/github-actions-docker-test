@@ -1,0 +1,15 @@
+name: CI
+on:
+  push:
+    branches: [ main ]
+jobs:
+  container-test-job:
+    runs-on: ubuntu-latest
+    container:
+      image: kenichirokimura/hello-ls:latest
+      volumes:
+        - my_docker_volume:/docs
+      options: --cpus 1
+    steps:
+      - name: Check mounted files
+        run: ls /docs
