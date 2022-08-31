@@ -11,5 +11,7 @@ jobs:
         - my_docker_volume:/docs
       options: --cpus 1
     steps:
+      - name: Check home directory
+        run: ls /home/github/
       - name: Check mounted files
         run: ls /docs
