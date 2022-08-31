@@ -12,6 +12,6 @@ jobs:
       options: --cpus 1
     steps:
       - name: Check home directory
-        run: ls /home/github/
+        run: ls /github/home
       - name: Check mounted files
         run: ls /docs
