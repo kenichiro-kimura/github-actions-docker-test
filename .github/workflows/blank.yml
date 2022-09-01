@@ -15,28 +15,10 @@ jobs:
         uses: actions/checkout@v2
       - name: Md2pdf
         run: /usr/bin/md2pdf.sh
-      - name: Get release
-        id: get_release
-        uses: jossef/action-latest-release-info@v1.1.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: create empty directory
-        run: |
-          mkdir empty.d
-      - name: empty dist archive
+      - name: upload assets
         uses: actions/upload-artifact@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          name: ${{ github.ref }}
-          path: empty.d
-      - name: Upload Release Asset
-        id: upload-release-asset
-        uses: actions/upload-release-asset@v1.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.get_release.outputs.upload_url }}
-          asset_path: ./docs.tgz
-          asset_name: docs.tgz
-          asset_content_type: application/x-gzip
+          name: docs
+          path: docs.tgz
