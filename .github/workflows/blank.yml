@@ -14,7 +14,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Md2pdf
-        run: ./md2pdf.sh
+        run: npx md-to-pdf --launch-options '{"args": ["--no-sandbox"]}' --md-file-encoding utf-8 --css base.css --body-class "body" README.md
       - name: Create release
         id: create_release
         uses: actions/create-release@v1.0.0
