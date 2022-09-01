@@ -6,20 +6,36 @@ jobs:
   container-test-job:
     runs-on: ubuntu-latest
     container:
-      image: kenichirokimura/hello-ls:latest
+      image: kenichirokimura/md2pdf:latest
       volumes:
         - my_docker_volume:/docs
       options: --cpus 1
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Check home directory
-        run: ls /github/home
-      - name: Check mounted files
-        run: ls /docs
-      - name: Check current dir
-        run: |
-          pwd
-          ls
+      - name: Md2pdf
+        run: ./md2pdf.sh
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@v1.0.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./README.pdf
+          asset_name: README.pdf
+          asset_content_type: application/pdf
+
+        
           
         
