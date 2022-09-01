@@ -17,3 +17,9 @@ jobs:
         run: ls /github/home
       - name: Check mounted files
         run: ls /docs
+      - name: Check current dir
+        run: |
+          pwd
+          ls
+          
+        
