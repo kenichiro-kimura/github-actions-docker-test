@@ -16,30 +16,21 @@ jobs:
       - name: Get changed files
         id: changed-files
         uses: tj-actions/changed-files@v10.1
-      - name: Check diff files  
-        run: echo ${{ steps.changed-files.outputs.all_modified_files }}
       - name: Md2pdf
-        run: /usr/bin/md2pdf.sh
+        run: /usr/bin/md2pdf.sh ${{ steps.changed-files.outputs.all_modified_files }}
       - name: Gets latest created release info
         id: latest_release_info
         uses: jossef/action-latest-release-info@v1.1.0
         env:
           GITHUB_TOKEN: ${{ github.token }}
-      - name: Remove asset
-        uses: flcdrg/remove-release-asset-action@v1
-        id: remove
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          release_id: ${{ steps.latest_release_info.outputs.id }}
-          asset_name: docs.tgz
       - name: Upload Release Asset
         id: upload-release-asset
-        uses: actions/upload-release-asset@v1.0.1
+        uses: WebFreak001/deploy-nightly@v1.1.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.latest_release_info.outputs.upload_url }}
+          release_id: ${{ steps.latest_release_info.outputs.id }}
           asset_path: ./docs.tgz
-          asset_name: docs.tgz
+          asset_name: docs-$$.tgz
           asset_content_type: application/x-gzip
