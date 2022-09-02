@@ -7,12 +7,17 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: kenichirokimura/md2pdf:latest
-      volumes:
-        - my_docker_volume:/docs
       options: --cpus 1
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Get changed files
+        id: changed-files
+        uses: tj-actions/changed-files@v10.1
+      - name: Check diff files  
+        run: echo ${{ steps.changed-files.outputs.all_modified_files }}
       - name: Md2pdf
         run: /usr/bin/md2pdf.sh
       - name: Gets latest created release info
