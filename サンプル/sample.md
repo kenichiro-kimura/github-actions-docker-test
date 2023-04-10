@@ -16,5 +16,4 @@ git configしたら日本語ファイルを使えるか？
 PRのテスト
 
 releaseを日付で作るように変更
-ghコマンドをインストール
-sudo不要？
+ghコマンドをdocker imageにインストール

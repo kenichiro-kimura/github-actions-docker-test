@@ -15,12 +15,6 @@ jobs:
           fetch-depth: 0
       - name: Git config
         run: git config --local core.quotepath false
-      - name: Install GitHub CLI
-        run: |
-          apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
-          apt-add-repository https://cli.github.com/packages
-          apt update
-          apt install gh
       - name: Get changed files
         id: changed-files
         uses: tj-actions/changed-files@v10.1
