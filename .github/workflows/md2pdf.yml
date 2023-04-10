@@ -31,6 +31,10 @@ jobs:
           # 今日の日付を取得
           date=${{ steps.date.outputs.date }}
 
+          # タグを追加
+          git tag -a $date -m "Release for $date"
+          git push orign $date
+
           # 既存のリリースを検索
           existing_release=$(gh release list | grep $date || true)
 
@@ -38,6 +42,7 @@ jobs:
             # 既存のリリースが存在しない場合、新しいリリースを作成
             gh release create $date --target main --notes "Release for $date"
           fi
+
       - name: Gets latest created release info
         id: latest_release_info
         uses: jossef/action-latest-release-info@v1.1.0
