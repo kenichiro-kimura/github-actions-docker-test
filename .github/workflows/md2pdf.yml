@@ -31,10 +31,13 @@ jobs:
           # 今日の日付を取得
           date=${{ steps.date.outputs.date }}
 
+          # 最後のコミットユーザーをpushするユーザとして指定する
+          git config user.name "$(git --no-pager log --format=format:'%an' -n 1)"
+          git config user.email "$(git --no-pager log --format=format:'%ae' -n 1)"
+          
           # タグを追加
           git tag -a $date -m "Release for $date"
-          PUSHURL="https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}"
-          git push ${PUSHURL} $date
+          git push orign $date
 
           # 既存のリリースを検索
           existing_release=$(gh release list | grep $date || true)
