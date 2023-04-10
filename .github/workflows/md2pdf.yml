@@ -19,6 +19,8 @@ jobs:
         id: changed-files
         uses: tj-actions/changed-files@v10.1
       - name: Md2pdf
+        env:
+          PUPPETEER_CACHE_DIR: /root/.cache/puppeteer/
         run: /usr/bin/md2pdf.sh ${{ steps.changed-files.outputs.all_modified_files }}
       - name: Get Today's Date
         id: date
@@ -27,7 +29,6 @@ jobs:
       - name: Create Release
         env:
           GH_TOKEN: ${{ github.token }}
-          PUPPETEER_CACHE_DIR: /root/.cache/puppeteer/
         run: |
           # 今日の日付を取得
           date=${{ steps.date.outputs.date }}
