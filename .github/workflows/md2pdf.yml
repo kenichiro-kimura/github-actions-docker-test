@@ -20,6 +20,22 @@ jobs:
         uses: tj-actions/changed-files@v10.1
       - name: Md2pdf
         run: /usr/bin/md2pdf.sh ${{ steps.changed-files.outputs.all_modified_files }}
+      - name: Get Today's Date
+        id: date
+        run: |
+          echo "date=$(date '+%Y-%m-%d')" >> $GITHUB_OUTPUT
+      - name: Create Release
+        run: |
+          # 今日の日付を取得
+          date=${{ steps.date.outputs.date }}
+
+          # 既存のリリースを検索
+          existing_release=$(gh release list | grep $date || true)
+
+          if [ -z "$existing_release" ]; then
+            # 既存のリリースが存在しない場合、新しいリリースを作成
+            gh release create $date --target main --notes "Release for $date"
+          fi
       - name: Gets latest created release info
         id: latest_release_info
         uses: jossef/action-latest-release-info@v1.1.0
