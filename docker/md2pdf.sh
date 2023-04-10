@@ -1,5 +1,6 @@
 #!/bin/bash
 export LANG=ja_JP.UTF-8
+yarn upgrade md-to-pdf
 for file in $@;do
     suf=`echo $file | sed 's/^.*\.\([^\.]*\)$/\1/'`
     if [ $suf = 'md' ] ; then

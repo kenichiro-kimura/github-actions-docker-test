@@ -19,9 +19,7 @@ jobs:
         id: changed-files
         uses: tj-actions/changed-files@v10.1
       - name: Md2pdf
-        run: |
-          yarn upgrade md-to-pdf
-          /usr/bin/md2pdf.sh ${{ steps.changed-files.outputs.all_modified_files }}
+        run: /usr/bin/md2pdf.sh ${{ steps.changed-files.outputs.all_modified_files }}
       - name: Get Today's Date
         id: date
         run: |
@@ -53,7 +51,6 @@ jobs:
             # 既存のリリースが存在しない場合、新しいリリースを作成
             gh release create $date --target master --notes "Release for $date"
           fi
-
       - name: Gets latest created release info
         id: latest_release_info
         uses: jossef/action-latest-release-info@v1.1.0
