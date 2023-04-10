@@ -20,7 +20,7 @@ jobs:
         uses: tj-actions/changed-files@v10.1
       - name: Md2pdf
         run: |
-          find /root 
+          yarn upgrade md-to-pdf
           /usr/bin/md2pdf.sh ${{ steps.changed-files.outputs.all_modified_files }}
       - name: Get Today's Date
         id: date
