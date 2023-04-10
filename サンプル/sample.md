@@ -19,3 +19,4 @@ releaseを日付で作るように変更
 ghコマンドをdocker imageにインストール
 workflowに環境変数追加
 tagがないとだめなので追加
+actionを指定してみる
