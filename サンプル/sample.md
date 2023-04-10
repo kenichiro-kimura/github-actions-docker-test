@@ -16,9 +16,3 @@ git configしたら日本語ファイルを使えるか？
 PRのテスト
 
 releaseを日付で作るように変更
-ghコマンドをdocker imageにインストール
-workflowに環境変数追加
-tagがないとだめなので追加
-actionを指定してみる
-push失敗したので調整
-ユーザー名を設定
