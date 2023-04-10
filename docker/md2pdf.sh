@@ -1,6 +1,5 @@
 #!/bin/bash
 export LANG=ja_JP.UTF-8
-export PUPPETEER_CACHE_DIR=/root/.cache/puppeteer/
 for file in $@;do
     suf=`echo $file | sed 's/^.*\.\([^\.]*\)$/\1/'`
     if [ $suf = 'md' ] ; then
