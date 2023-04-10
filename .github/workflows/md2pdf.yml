@@ -44,7 +44,7 @@ jobs:
 
           if [ -z "$existing_release" ]; then
             # 既存のリリースが存在しない場合、新しいリリースを作成
-            gh release create $date --target main --notes "Release for $date"
+            gh release create $date --target master --notes "Release for $date"
           fi
 
       - name: Gets latest created release info
