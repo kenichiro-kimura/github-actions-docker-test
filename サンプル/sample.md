@@ -20,3 +20,4 @@ ghコマンドをdocker imageにインストール
 workflowに環境変数追加
 tagがないとだめなので追加
 actionを指定してみる
+push失敗したので調整

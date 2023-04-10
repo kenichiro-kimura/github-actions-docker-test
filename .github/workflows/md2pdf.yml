@@ -27,14 +27,14 @@ jobs:
       - name: Create Release
         env:
           GH_TOKEN: ${{ github.token }}
-        uses: actions/checkout@v2
         run: |
           # 今日の日付を取得
           date=${{ steps.date.outputs.date }}
 
           # タグを追加
           git tag -a $date -m "Release for $date"
-          git push orign $date
+          PUSHURL="https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}"
+          git push ${PUSHURL} $date
 
           # 既存のリリースを検索
           existing_release=$(gh release list | grep $date || true)
