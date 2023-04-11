@@ -20,3 +20,4 @@ releaseを日付で作るように変更
 タグが存在したらタグを作らない。
 同日2回目のコミットでチェック
 github actionsのrunnerで動かすとpuppeteerが動かないので、スクリプトの最初でyarn upgradeするように修正
+/rootと/homeをチェック

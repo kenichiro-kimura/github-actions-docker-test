@@ -21,7 +21,8 @@ jobs:
       - name: Md2pdf
         run: |
           /usr/bin/md2pdf.sh ${{ steps.changed-files.outputs.all_modified_files }}
-          find / 
+          find /root
+          find /home
       - name: Get Today's Date
         id: date
         run: |
